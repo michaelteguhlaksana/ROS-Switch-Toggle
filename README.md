@@ -5,7 +5,7 @@ During operation, there are 2 nodes,1 as the device and 1 as the remote.
 For this implementation, the device is the computer running the python node (toggle2_1.py) and the remote is the Arduino MEGA board.
 
 The remote consists of a node, which act as a subscriber and a service client.
-The device consists of a node, which act as a publisher and a service server.
+The device also consists of a node acting as a publisher and a service server.
 
 The state of the thruster is represented by a boolean variable (True for on, and False for off).
 The request message and response message is an Empty message ([]). 
