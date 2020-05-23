@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 DEVICE NODE
 ----------------
@@ -45,8 +46,6 @@ CLASSES
 
 
 """
-
-#!/usr/bin/env python
 
 import rospy
 from std_msgs.msg import Bool
