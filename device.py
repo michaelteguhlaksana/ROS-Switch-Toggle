@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 """
 DEVICE NODE
 ----------------
@@ -43,8 +44,6 @@ CLASSES
     Attributes:
     state:  The state of the thruster. Boolean value. True for on, and False for off
 
-
-
 """
 
 import rospy
@@ -61,7 +60,6 @@ class Publisher(object):
     queue: The maximum queue length for subscriber. The default is 10
     rate: The publishing rate. The default is 10 hz.
     state: The state of the thruster. Either True or False.
-
 
     '''
 
@@ -92,11 +90,8 @@ class Publisher(object):
 
         '''
         self.button.toggle_state()
-        self.pub.publish(self.button.state)
+        self.pub.publish(self.button.get_state())
         return []
-
-
-
 
 class Button(object):
     """The Button Object
@@ -114,12 +109,16 @@ class Button(object):
         """Set the state of the thruster"""
         #This is honestly redundant for current condition.
         #But if the state is more than 1 states, this will be more useful
-        self.state = state
+        self._state = state
+
+    def get_state(self):
+        """Returns the current state of the thruster"""
+        return self._state
 
     def toggle_state(self):
         """Flip the switch of the thruster"""
-        self.set_state(not self.state)
-        print "State toggled to: %s" %(self.state)
+        self.set_state(not self._state)
+        print "State toggled to: %s" %(self._state)
 
 if __name__ == "__main__":
     try:
