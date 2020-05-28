@@ -2,7 +2,7 @@
 Toggling a thruster switch using ROS (rospy) and Arudino MEGA 2560.
 
 During operation, there are 2 nodes,1 as the device and 1 as the remote.
-For this implementation, the device is the computer running the python node (toggle2_1.py) and the remote is the Arduino MEGA board.
+For this implementation, the device is the computer running the python node (device.py) and the remote (remote.ino) is the Arduino MEGA board.
 
 The remote consists of a node, which act as a subscriber and a service client.
 The device also consists of a node acting as a publisher and a service server.
