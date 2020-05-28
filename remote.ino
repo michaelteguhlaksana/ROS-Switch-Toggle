@@ -1,51 +1,27 @@
-#include <ros.h>
-#include <std_srvs/Empty.h>
+#include<task2_node.h>
+
+#ifndef ROS_STD_MSGS_STD_SRVS  // defined in task2_node.h
 #include <std_msgs/Bool.h>
-
-class Node{
- private:
-    ros::Subscriber<std_msgs::Bool> sub;
-    ros::ServiceClient<std_srvs::Empty::Request, std_srvs::Empty::Response> cln;
- public:
-
-    void print_state(const std_msgs::Bool& state){
-      if (state.data==true){
-        digitalWrite(13, HIGH);
-      }
-      else{
-        digitalWrite(13, LOW);
-      }
-    }
-    ros::NodeHandle node;
-    Node(const char topic[100], void (*cb) (std_msgs::Bool&), char srv[100]):
-    sub(topic, cb), cln(srv)
-    {}
-
-    void setup_node() {
-      node.initNode();
-      node.subscribe(sub);
-      node.serviceClient(cln);
-    }
-
-    void client_call(){
-      std_srvs::Empty::Request req;
-      std_srvs::Empty::Response rep;
-      cln.call(req, rep);
-    }
-};
+#endif  // ROS_STD_MSGS_STD_SRVS
 
 void print_state(const std_msgs::Bool& state){
-  if (state.data==true){
-    digitalWrite(13, HIGH);
-  }
-  else{
-    digitalWrite(13, LOW);
-  }
+  /**
+   * Shows the state of the thruster
+   * 
+   * If the LED is ON, the thruster is ON and vice versa
+   * 
+   * Paremeter:
+   * state: The state of the thruster
+   */
+    if (state.data==true){
+      digitalWrite(13, HIGH);
+    }
+    else{
+      digitalWrite(13, LOW);
+    }
 }
 
 Node nh ("state", &print_state, "state_srv");
-
-
 
 unsigned long t_start;
 
@@ -55,6 +31,7 @@ void setup() {
     nh.node.spinOnce();
   }
   pinMode(13,OUTPUT);
+  digitalWrite(13, LOW);
   
   nh.node.loginfo("Startup complete");
   t_start=millis();
